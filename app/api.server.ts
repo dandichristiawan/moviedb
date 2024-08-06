@@ -8,18 +8,17 @@ const options = {
     }
 };
 
-export async function getTopRatedMovies(page = 1) {
-    try {
-        await new Promise(resolve => setTimeout(resolve, 1000))
+export async function getMovies(page = 1, category: string) {
 
-        const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`, options)
+    try {
+
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=${page}`, options)
 
         if (!response.ok) {
             throw new Error('Failed to fetch!')
         }
 
         const data = await response.json()
-
         return data.results as Result[]
 
     } catch (error) {
