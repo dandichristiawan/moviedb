@@ -53,12 +53,15 @@ export const CategoryControls = ({ page }: { page: number }) => {
       newSelectedGenres = [...selectedGenres, value];
     }
     setSelectedGenres(newSelectedGenres);
-    const genresQuery = newSelectedGenres.join('%2C');
-    router.push(`/?page=${page}&sort_by=${sortBy}&with_genres=${genresQuery}`);
+  };
+
+  const applyGenres = () => {
+    const genresQuery = selectedGenres.join('%2C');
+    router.push(`/?page=${page}&with_genres=${genresQuery}`);
   };
 
   return (
-    <div className="flex flex-row w-11/12 justify-between p-4 items-center">
+    <div className="flex flex-row w-full 2xl:w-11/12 justify-between p-4 2xl:py-4 2xl:p-0 items-center">
       <h1>Movies</h1>
       <div className="flex flex-row justify-end gap-x-4">
         <Select onValueChange={handleCategoryChange}>
@@ -75,36 +78,6 @@ export const CategoryControls = ({ page }: { page: number }) => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Dialog>
-          <DialogTrigger>Genres</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Genres</DialogTitle>
-              <DialogDescription>
-                <div className="grid grid-cols-5 my-5 gap-4">
-                  {genresList.map((value, index) => (
-                    <React.Fragment key={index}>
-                      <div className="flex justify-start items-center">
-                        <div className="border border-gray-500 rounded-full">
-                          <Toggle className="rounded-full p-4 w-24 text-black hover:bg-[#48518f] hover:text-white data-[state=on]:bg-[#48518f] data-[state=on]:text-[white]">
-                            {value.name}
-                          </Toggle>
-                        </div>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className="justify-end">
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">
-                  Filter by Genres
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
         <Select onValueChange={handleSortByChange}>
           <SelectTrigger className="w-[180px] text-white bg-[#48518f] border border-gray-500 rounded-2xl">
             <SelectValue placeholder="Sort By" />
@@ -119,6 +92,45 @@ export const CategoryControls = ({ page }: { page: number }) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        <Dialog>
+          <DialogTrigger className="rounded-full border border-gray-500 p-2">
+            Genres
+          </DialogTrigger>
+          <DialogContent className=" border-none">
+            <DialogHeader>
+              <DialogTitle>Genres</DialogTitle>
+              <DialogDescription>
+                <div className="grid grid-cols-5 my-5 gap-4">
+                  {genresList.map((value, index) => (
+                    <React.Fragment key={index}>
+                      <div className="flex justify-start items-center">
+                        <div className="border border-gray-500 rounded-full">
+                          <Toggle
+                            className={`rounded-full p-4 w-24 hover:bg-gradient-to-br from-[#3079a2] to-[#681a74] hover:text-white ${
+                              selectedGenres.includes(value.id)
+                                ? 'bg-gradient-to-br from-[#3079a2] to-[#681a74] data-[state=on]:text-white text-white'
+                                : 'bg-white text-black'
+                            }`}
+                            onClick={() => handleGenresChange(value.id)}
+                          >
+                            {value.name}
+                          </Toggle>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="justify-end">
+              <DialogClose asChild>
+                <Button type="button" variant="secondary" onClick={applyGenres}>
+                  Filter by Genres
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

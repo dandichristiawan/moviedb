@@ -34,7 +34,8 @@ export async function getSortedMovies(
   sortBy: string,
   genres: number[] = []
 ) {
-  const genresQuery = genres.length > 0 ? genres.join(',') : '';
+  const uniqueGenres = Array.from(new Set(genres)).filter((id) => id !== 0);
+  const genresQuery = uniqueGenres.length > 0 ? uniqueGenres.join(',') : '';
   const url = `${baseURL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sortBy}&with_genres=${genresQuery}`;
 
   try {
@@ -45,6 +46,7 @@ export async function getSortedMovies(
     }
 
     const data = await response.json();
+    // console.log(data.results)
     return data.results as Result[];
   } catch (e) {
     console.log(e);

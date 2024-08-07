@@ -17,14 +17,17 @@ async function RenderMoviesByCategory({
     <>
       <div className="grid grid-cols-1 lg:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
         {movies.map((movie) => (
-          <div key={movie.id} className="flex flex-col gap-3 w-[200px]">
+          <div
+            key={movie.id}
+            className="flex flex-col gap-3 w-[200px] 2xl:w-[250px]"
+          >
             <Image
               src={`${imageBaseUrl}${movie.poster_path}`}
               alt="ok"
               width={200}
               height={300}
               loading="lazy"
-              className="rounded-xl"
+              className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
             />
             <div className="flex flex-row justify-between">
               <p className="text-[11px]">{movie.title}</p>
@@ -50,16 +53,19 @@ async function RenderMoviesBySort({
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-5 gap-x-20 gap-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
         {movies.map((movie) => (
-          <div key={movie.id} className="flex flex-col gap-3 w-[200px]">
+          <div
+            key={movie.id}
+            className="flex flex-col gap-3 w-[200px] 2xl:w-[250px]"
+          >
             <Image
               src={`${imageBaseUrl}${movie.poster_path}`}
               alt="ok"
               width={200}
               height={300}
               loading="lazy"
-              className="rounded-xl"
+              className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
             />
             <div className="flex flex-row justify-between">
               <p className="text-[11px]">{movie.title}</p>
@@ -106,6 +112,7 @@ export default function Home({
         page={page}
         category={category || 'popular'}
         sortBy={sortBy}
+        genres={genres}
       />
     </main>
   );
