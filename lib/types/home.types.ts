@@ -1,4 +1,4 @@
-interface RootObject {
+export interface ApiResponse {
     page: number;
     results: Result[];
     total_pages: number;

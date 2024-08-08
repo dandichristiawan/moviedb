@@ -1,5 +1,6 @@
 import { Result } from '@/lib/types/home.types';
 
+
 const options = {
   method: 'GET',
   headers: {
@@ -7,6 +8,8 @@ const options = {
     Authorization:
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGIyZmY4NWFjODA4YTAxNTQ4ZDE0ZTU5NGUzMDJlOSIsIm5iZiI6MTcyMjkxMTIxMi44Mzk2MDQsInN1YiI6IjY2YjAzOGFiYjk3NDY2OWZiY2M1ZmI2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bs0JmoMjcIfnHr7m04vUB7F0_qabu-MssySstvoluQY',
   },
+  cache: 'no-store' as RequestCache, // Include cache option here
+
 };
 
 const baseURL = 'https://api.themoviedb.org/3';
@@ -46,7 +49,7 @@ export async function getSortedMovies(
     }
 
     const data = await response.json();
-    // console.log(data.results)
+    console.log(data)
     return data.results as Result[];
   } catch (e) {
     console.log(e);

@@ -3,6 +3,9 @@ import { Suspense } from 'react';
 import { getMovies, getSortedMovies } from './api.server';
 import { CategoryControls } from '@/components/category-controls/category-controls';
 import { PaginationControls } from '@/components/pagination-controls/pagination-controls';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation'
+
 
 async function RenderMoviesByCategory({
   page,
@@ -82,10 +85,10 @@ export default function Home({
   searchParams,
 }: {
   searchParams: {
-    page: string;
-    category: string;
-    sort_by: string;
-    with_genres: string;
+    page?: string;
+    category?: string;
+    sort_by?: string;
+    with_genres?: string;
   };
 }) {
   let page = parseInt(searchParams.page || '1', 10);
@@ -95,6 +98,7 @@ export default function Home({
     ? searchParams.with_genres.split(',').map(Number)
     : [];
   const shouldRenderMoviesBySort = sortBy || genres.length > 0;
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gradient-to-br from-[#3079a2] to-[#681a74] text-white">
       <CategoryControls page={page} />

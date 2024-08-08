@@ -113,28 +113,12 @@ export const sortList = [
     name: 'Original Title Z-A',
   },
   {
-    value: 'popularity.asc',
-    name: 'Popularity ⬆',
-  },
-  {
     value: 'popularity.desc',
-    name: 'Popularity ⬇',
+    name: 'Popular',
   },
   {
-    value: 'revenue.asc',
-    name: 'Revenue ⬆',
-  },
-  {
-    value: 'revenue.desc',
-    name: 'Revenue ⬇',
-  },
-  {
-    value: 'primary_release_date.asc',
-    name: 'Primary Release Date ⬆',
-  },
-  {
-    value: 'primary_release_date.desc',
-    name: 'Primary Release Date ⬇',
+    value: 'popularity.asc',
+    name: 'Not Popular',
   },
   {
     value: 'title.asc',
@@ -145,19 +129,11 @@ export const sortList = [
     name: 'Title Z-A',
   },
   {
-    value: 'vote_average.asc',
-    name: 'Vote Average ⬆',
+    value: 'primary_release_date.asc',
+    name: 'Release Date ⬆',
   },
   {
-    value: 'vote_average.desc',
-    name: 'Vote Average ⬇',
-  },
-  {
-    value: 'vote_count.asc',
-    name: 'Vote Count ⬆',
-  },
-  {
-    value: 'vote_count.desc',
-    name: 'Vote Count ⬇',
+    value: 'primary_release_date.desc',
+    name: 'Release Date ⬇',
   },
 ];
