@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const getYYYY = (theYear: string) => {
+  const year = new Date(theYear).getFullYear();
+  return year
+}
+
 export const genresList = [
   {
     id: '28',

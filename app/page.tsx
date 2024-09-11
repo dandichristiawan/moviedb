@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import { getMovies, getSortedMovies } from './api.server';
 import { CategoryControls } from '@/components/category-controls/category-controls';
 import { PaginationControls } from '@/components/pagination-controls/pagination-controls';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation'
+import Link from 'next/link';
+import { getYYYY } from '@/lib/utils';
 
 
 async function RenderMoviesByCategory({
@@ -18,27 +18,34 @@ async function RenderMoviesByCategory({
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
+      <div className="grid grid-cols-1 lg:grid-cols-4 2xl:grid-cols-5 gap-x-28 gap-y-10 p-4">
         {movies.map((movie) => (
           <div
             key={movie.id}
             className="flex flex-col gap-3 w-[200px] 2xl:w-[250px]"
           >
-            <Image
-              src={`${imageBaseUrl}${movie.poster_path}`}
-              alt="ok"
-              width={200}
-              height={300}
-              loading="lazy"
-              className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
-            />
-            <div className="flex flex-row justify-between">
-              <p className="text-[11px]">{movie.title}</p>
-              <p className="text-[11px]">{movie.vote_average}</p>
-            </div>
+            <Link href={`/detail/${movie.id}`} passHref>
+              <div className="relative group hover:bg-gradient-to-b from-gray-500 to-gray-400 rounded-xl">
+                <Image
+                  src={`${imageBaseUrl}${movie.poster_path}`}
+                  alt="ok"
+                  width={200}
+                  height={300}
+                  loading="lazy"
+                  className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
+                />
+                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
+                  <p className="text-white text-xs text-center p-1">{movie.overview}</p>
+                </div>
+              </div>
+              <div className="flex flex-row justify-between">
+                <p className="text-[11px]">{movie.title}</p>
+                <p className="text-[11px]">{getYYYY(movie.release_date)}</p>
+              </div>
+            </Link>
           </div>
         ))}
-      </div>
+      </div >
     </>
   );
 }
@@ -56,23 +63,28 @@ async function RenderMoviesBySort({
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-x-28 gap-y-10 p-4">
         {movies.map((movie) => (
           <div
             key={movie.id}
             className="flex flex-col gap-3 w-[200px] 2xl:w-[250px]"
           >
-            <Image
-              src={`${imageBaseUrl}${movie.poster_path}`}
-              alt="ok"
-              width={200}
-              height={300}
-              loading="lazy"
-              className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
-            />
+            <div className="relative group hover:bg-gradient-to-b from-gray-500 to-gray-400 rounded-xl">
+              <Image
+                src={`${imageBaseUrl}${movie.poster_path}`}
+                alt="ok"
+                width={200}
+                height={300}
+                loading="lazy"
+                className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
+              />
+              <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
+                <p className="text-white text-lg">{movie.overview}</p>
+              </div>
+            </div>
             <div className="flex flex-row justify-between">
               <p className="text-[11px]">{movie.title}</p>
-              <p className="text-[11px]">{movie.vote_average}</p>
+              <p className="text-[11px]">{getYYYY(movie.release_date)}</p>
             </div>
           </div>
         ))}

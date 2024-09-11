@@ -1,3 +1,4 @@
+import { Details } from '@/lib/types/detail.types';
 import { Result } from '@/lib/types/home.types';
 
 
@@ -49,10 +50,26 @@ export async function getSortedMovies(
     }
 
     const data = await response.json();
-    console.log(data)
     return data.results as Result[];
   } catch (e) {
     console.log(e);
     return [];
+  }
+}
+
+export async function getMovieById(
+  movie_id: string | string[] | undefined
+) {
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`
+
+  try {
+    const response = await fetch(url, options)
+    if (!response.ok) {
+      throw new Error('Failed to fetch!')
+    }
+    const data = await response.json()
+    return data as Details
+  } catch (e) {
+    console.log(e)
   }
 }
