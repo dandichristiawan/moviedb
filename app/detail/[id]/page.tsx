@@ -1,13 +1,9 @@
 import { getMovieById } from '@/app/api.server';
-import { useParams } from 'next/navigation';
-
 
 export default async function Detail({
-    params,
-    searchParams
+    params
 }: {
     params: { id: string };
-    searchParams: { page: string };
 }) {
 
     const data = await getMovieById(params.id);
