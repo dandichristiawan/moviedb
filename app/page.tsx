@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { getMovies, getSortedMovies } from './api.server';
+import { renderStars } from '@/components/rating/rating';
 import { CategoryControls } from '@/components/category-controls/category-controls';
 import { PaginationControls } from '@/components/pagination-controls/pagination-controls';
 import Link from 'next/link';
 import { getYYYY } from '@/lib/utils';
+
 
 
 async function RenderMoviesByCategory({
@@ -34,13 +36,13 @@ async function RenderMoviesByCategory({
                   loading="lazy"
                   className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
                 />
-                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
-                  <p className="text-white text-xs text-center p-1">{movie.overview}</p>
+                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl p-4">
+                  <div className="flex flex-col gap-y-4 text-center items-center justify-center">
+                    <p className="text-[14px]">{movie.title}</p>
+                    <p className="text-[14px]">{getYYYY(movie.release_date)}</p>
+                    <div className='flex flex-row items-center'>{renderStars(movie.vote_average)}</div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between">
-                <p className="text-[11px]">{movie.title}</p>
-                <p className="text-[11px]">{getYYYY(movie.release_date)}</p>
               </div>
             </Link>
           </div>
@@ -69,26 +71,31 @@ async function RenderMoviesBySort({
             key={movie.id}
             className="flex flex-col gap-3 w-[200px] 2xl:w-[250px]"
           >
-            <div className="relative group hover:bg-gradient-to-b from-gray-500 to-gray-400 rounded-xl">
-              <Image
-                src={`${imageBaseUrl}${movie.poster_path}`}
-                alt="ok"
-                width={200}
-                height={300}
-                loading="lazy"
-                className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
-              />
-              <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
-                <p className="text-white text-lg">{movie.overview}</p>
+            <Link href={`/detail/${movie.id}`} passHref>
+              <div className="relative group hover:bg-gradient-to-b from-gray-500 to-gray-400 rounded-xl">
+                <Image
+                  src={`${imageBaseUrl}${movie.poster_path}`}
+                  alt="ok"
+                  width={200}
+                  height={300}
+                  loading="lazy"
+                  className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
+                />
+                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
+                  <p className="text-white text-lg">{movie.overview}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-row justify-between">
-              <p className="text-[11px]">{movie.title}</p>
-              <p className="text-[11px]">{getYYYY(movie.release_date)}</p>
-            </div>
+              <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl p-4">
+                <div className="flex flex-col gap-y-4 text-center items-center justify-center">
+                  <p className="text-[14px]">{movie.title}</p>
+                  <p className="text-[14px]">{getYYYY(movie.release_date)}</p>
+                  <div className='flex flex-row items-center'>{renderStars(movie.vote_average)}</div>
+                </div>
+              </div>
+            </Link>
           </div>
         ))}
-      </div>
+      </div >
     </>
   );
 }
