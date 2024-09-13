@@ -81,15 +81,12 @@ async function RenderMoviesBySort({
                   loading="lazy"
                   className="rounded-xl w-[200px] h-[300px] 2xl:w-[250px] 2xl:h-[350px]"
                 />
-                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl">
-                  <p className="text-white text-lg">{movie.overview}</p>
-                </div>
-              </div>
-              <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl p-4">
-                <div className="flex flex-col gap-y-4 text-center items-center justify-center">
-                  <p className="text-[14px]">{movie.title}</p>
-                  <p className="text-[14px]">{getYYYY(movie.release_date)}</p>
-                  <div className='flex flex-row items-center'>{renderStars(movie.vote_average)}</div>
+                <div className="hidden group-hover:flex justify-center items-center absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl p-4">
+                  <div className="flex flex-col gap-y-4 text-center items-center justify-center">
+                    <p className="text-[14px]">{movie.title}</p>
+                    <p className="text-[14px]">{getYYYY(movie.release_date)}</p>
+                    <div className='flex flex-row items-center'>{renderStars(movie.vote_average)}</div>
+                  </div>
                 </div>
               </div>
             </Link>

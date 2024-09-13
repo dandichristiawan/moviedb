@@ -25,6 +25,41 @@ export interface Details {
     video: boolean
     vote_average: number
     vote_count: number
+    credits: Credits
+}
+
+interface Credits {
+    cast: Cast[]
+    crew: Crew[]
+}
+
+interface Cast {
+    adult: boolean
+    gender: number
+    id: number
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    profile_path?: string
+    cast_id: number
+    character: string
+    credit_id: string
+    order: number
+}
+
+interface Crew {
+    adult: boolean
+    gender: number
+    id: number
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    profile_path?: string
+    credit_id: string
+    department: string
+    job: string
 }
 
 interface Genre {
@@ -32,7 +67,7 @@ interface Genre {
     name: string
 }
 
-interface ProductionCompany {
+export interface ProductionCompany {
     id: number
     logo_path?: string
     name: string

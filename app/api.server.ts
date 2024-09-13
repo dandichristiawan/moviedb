@@ -19,7 +19,6 @@ export async function getMovies(page = 1, category: string) {
   const url = `${baseURL}/movie/${category}?language=en-US&page=${page}`;
 
   try {
-    console.log(url);
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error('Failed to fetch!');
@@ -60,7 +59,7 @@ export async function getSortedMovies(
 export async function getMovieById(
   movie_id: string | string[] | undefined
 ) {
-  const url = `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}?append_to_response=credits&language=en-US`
 
   try {
     const response = await fetch(url, options)
